@@ -1,5 +1,5 @@
 {
-  "name": "dotenv-env",
+  "name": "@socheatsok78/dotenv-env",
   "version": "0.1.0",
   "main": "dist/umd/index.js",
   "typings": "dist/umd/src/index.d.ts",
