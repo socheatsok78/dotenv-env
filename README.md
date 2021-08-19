@@ -17,7 +17,80 @@ yarn add @socheatsok78/dotenv-env
 
 ## Usage
 
-Here an example usage with `vuejs` project.
+Simply add a `tsconfig.json` or `jsconfig.json` to indicates that the directory is the root of a TypeScript or JavaScript project.
+
+See https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
+Here a minimal configurations:
+
+Example `jsconfig.json`:
+
+```json
+{
+  "include": [
+    "types/**/*"
+  ],
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "moduleResolution": "node",
+    "esModuleInterop": false,
+    "baseUrl": ".",
+    "paths": {
+      //
+    }
+  }
+}
+```
+
+Example `tsconfig.json`:
+
+```json
+{
+  "include": [
+    "types/**/*"
+  ],
+  "compilerOptions": {
+    "target": "es5",
+    "strict": true,
+    "module": "es2015",
+    "moduleResolution": "node"
+  }
+}
+```
+
+#### Using with `node`
+
+There is no other configuration needed for working with `nodejs`. 
+
+```ts
+// types/dotenv.d.ts
+import { NodeEnvironment } from '@socheatsok78/dotenv-env'
+
+declare module "@socheatsok78/dotenv-env" {
+  interface NodeEnvironment {
+    /**
+     * This will be one of "development", "production" or "test" depending on the mode the app is running in
+     */
+    NODE_ENV: string
+  }
+}
+```
+
+Then within your project e.g. `index.js`
+
+```js
+// main.js
+import { env } from '@socheatsok78/dotenv-env'
+
+const mode = env(NODE_ENV, 'development')
+```
+
+#### Using with `browser`
+
+> For this to work in the browser you'll need to use bundler such as `webpack`, `rollup` or others for this to work.
+
+Here an example usage with `vuejs` project. This will work out-of-the-box since `@vue/cli` uses `webpack` as its bundler.
 
 First, update your `.env` file.
 
@@ -32,8 +105,7 @@ VUE_APP_ANOTHER_VARIABLE=value
 Create a new typescript's type declaration `dotenv.d.ts` in `types` folder.
 
 ```ts
-// dotenv.d.ts
-
+// types/dotenv.d.ts
 import { NodeEnvironment } from '@socheatsok78/dotenv-env'
 
 declare module "@socheatsok78/dotenv-env" {
@@ -65,7 +137,7 @@ const MY_ENV_VARIABLE = env(VUE_APP_MY_ENV_VARIABLE, 'default')
 
 **Preview**
 
-<img src="https://user-images.githubusercontent.com/4363857/130062753-1aaaefdb-6e29-40f5-abe8-9366d78433e6.png" width="360px">
+<img src="https://user-images.githubusercontent.com/4363857/130068203-e1575bb3-c5c8-46ff-8f97-5bc5997b487b.gif" width="100%">
 
 ## Licensed
 
