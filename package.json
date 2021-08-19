@@ -7,6 +7,12 @@
   "homepage": "https://github.com/socheatsok78/dotenv-env#readme",
   "author": "Socheat Sok <alex@socheat.net>",
   "license": "MIT",
+  "directories": {
+    "lib": "dist"
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "environment",
     "dotenv",
